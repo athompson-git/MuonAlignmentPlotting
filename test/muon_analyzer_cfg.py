@@ -13,13 +13,13 @@ fileNames = cms.untracked.vstring(
 )
 )
 
-process.demo = cms.EDAnalyzer('muon_analyzer',
-globalmuon = cms.InputTag("ALCARECOMuAlCalIsolatedMu", "globalmuon", "RECO"),
+process.analysis = cms.EDAnalyzer('muon_analyzer',
+globalmuon = cms.InputTag("ALCARECOMuAlCalIsolatedMu", "GlobalMuon", "RECO"),
 )
 
 process.TFileService = cms.Service("TFileService",
 fileName = cms.string('outfile.root')
 )
 
-process.p = cms.Path(process.demo)
+process.p = cms.Path(process.analysis)
 

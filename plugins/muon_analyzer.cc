@@ -79,7 +79,9 @@ globalmuon_(consumes<std::vector<reco::Track>>(iConfig.getParameter<edm::InputTa
    usesResource("TFileService");
    edm::Service<TFileService> fs;
    // 3. Make a histogram.
-   histo = fs->make<TH1D>("pt", "Pt", 50, 0, 50);
+   histo = fs->make<TH1D>("pt", "Muon Pt", 100, 250, 1000);
+   hist->GetXaxis->SetTitle("Muon Pt (GeV/c)");
+   hist->GetYaxis->SetTitle("Events");
 }
 
 
@@ -109,6 +111,7 @@ void muon_analyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
    // 6. Main event loop. Make an iterator on the handle and fill the histogram.
    for(std::vector<reco::Track>::const_iterator itTrack = globalmuon->begin();
        itTrack != globalmuon->end(); ++itTrack ) {
+       printf("PT = %f \n", itTrack->pt());
        histo->Fill(itTrack->pt());
    }
 
